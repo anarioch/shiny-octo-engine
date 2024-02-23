@@ -15,8 +15,9 @@ def transform(xmlText):
         "description": xml.find("description").text,
     }
 
+
 # Return details about a company
-def index(request, company_id):
+def company(request, company_id):
     # Fetch
     r = requests.get(f'https://raw.githubusercontent.com/MiddlewareNewZealand/evaluation-instructions/main/xml-api/{company_id}.xml')
     if r.status_code != 200:
