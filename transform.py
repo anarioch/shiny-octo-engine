@@ -1,5 +1,15 @@
 #!/bin/python3
 
+# This is a simple CLI app to invoke the transform against the remote MWNZ sample API.
+#
+# Example invocations:
+# $ ./transform.py 1
+# {"id": "1", "name": "MWNZ", "description": "..is awesome"}
+# $ ./transform.py 4
+# Error: target API call failed with code '404'
+
+
+import sys
 import requests
 import xml.etree.ElementTree as ET
 import json
@@ -28,6 +38,18 @@ def process(id):
     print(output)
 
 
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: python transform.py <company_id>")
+        sys.exit(1)
+    
+    try:
+        company_id = int(sys.argv[1])
+    except ValueError:
+        print("Error: company_id must be a number")
+        sys.exit(1)
+
+    process(company_id)
+
 if __name__ == "__main__":
-    id = '1'
-    process(id)
+    main()
