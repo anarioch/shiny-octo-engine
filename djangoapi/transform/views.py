@@ -21,7 +21,8 @@ def company(request, company_id):
     # Fetch
     r = requests.get(f'https://raw.githubusercontent.com/MiddlewareNewZealand/evaluation-instructions/main/xml-api/{company_id}.xml')
     if r.status_code != 200:
-        return HttpResponse(status=502, content=f"Error accessing backend API, received status code '{r.status_code}'")
+        error_detail = {"error": "Resource not found", "error_description": f"No company found for ID '{company_id}'"}
+        return HttpResponse(status=404, content=json.dumps(error_detail, indent=4))
 
     # Transform
     data = transform(r.text)
