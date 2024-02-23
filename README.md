@@ -6,7 +6,18 @@ The history of this repo shows the basic steps that have been taken to arrive he
 
 ## Implementation
 
-The CLI app [transform.py](transform.py) shows the invocation of the remote API and translation from XML to JSON.
+### CLI
+
+The CLI app [transform.py](transform.py) shows the invocation of the remote API and translation from XML to JSON.  It uses standard python idioms for a main method and argument parsing.
+
+```
+$ ./transform.py 1
+{"id": "1", "name": "MWNZ", "description": "..is awesome"}
+$ ./transform.py 4
+Error: target API call failed with code '404'
+```
+
+### Django API
 
 The Django app uses the same request/transform logic and exposes it behind a REST API implemented in Django.  Key notes:
 * [views.py](djangoapi/transform/views.py) contains the main logic.
