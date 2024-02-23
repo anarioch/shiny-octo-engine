@@ -24,6 +24,19 @@ The Django app uses the same request/transform logic and exposes it behind a RES
 * I have run this locally via the Django development server `python manage.py runserver` and get the same results as via the CLI app
 * [tests.py](djangoapi/transform/tests.py) contains unit tests, which both pass when invoked with `python manage.py test`
 
+```
+$ curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/v1/companies/1
+200
+$ curl http://127.0.0.1:8000/v1/companies/1
+{"id": "1", "name": "MWNZ", "description": "..is awesome"}
+
+$ curl http://127.0.0.1:8000/v1/companies/2
+{"id": "2", "name": "Other", "description": "....is not"}
+
+$ curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/v1/companies/4
+404
+```
+
 ## Notes
 
 This is a very simple implementation, matching the simplicity of the requirements.  This makes it easier to extend as further requirements are shaped.
