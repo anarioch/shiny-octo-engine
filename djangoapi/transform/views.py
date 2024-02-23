@@ -15,11 +15,10 @@ def transform(xmlText):
         "description": xml.find("description").text,
     }
 
-def index(request):
-    id = '1'
-
+# Return details about a company
+def index(request, company_id):
     # Fetch
-    r = requests.get(f'https://raw.githubusercontent.com/MiddlewareNewZealand/evaluation-instructions/main/xml-api/{id}.xml')
+    r = requests.get(f'https://raw.githubusercontent.com/MiddlewareNewZealand/evaluation-instructions/main/xml-api/{company_id}.xml')
     if r.status_code != 200:
         return HttpResponse(status=502, content=f"Error accessing backend API, received status code '{r.status_code}'")
 
