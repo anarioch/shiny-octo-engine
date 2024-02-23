@@ -9,7 +9,7 @@
 # Error: target API call failed with code '404'
 
 
-import sys
+import argparse
 import requests
 import xml.etree.ElementTree as ET
 import json
@@ -39,17 +39,12 @@ def process(id):
 
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python transform.py <company_id>")
-        sys.exit(1)
-    
-    try:
-        company_id = int(sys.argv[1])
-    except ValueError:
-        print("Error: company_id must be a number")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Return company details")
+    parser.add_argument('company_id', type=int, help="The company to look up")
 
-    process(company_id)
+    args = parser.parse_args()
+
+    process(args.company_id)
 
 if __name__ == "__main__":
     main()
