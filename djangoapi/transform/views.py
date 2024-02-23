@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
 import requests
 import xml.etree.ElementTree as ET
@@ -21,8 +21,8 @@ def company(request, company_id):
     # Fetch
     r = requests.get(f'https://raw.githubusercontent.com/MiddlewareNewZealand/evaluation-instructions/main/xml-api/{company_id}.xml')
     if r.status_code != 200:
-        error_detail = {"error": "Resource not found", "error_description": f"No company found for ID '{company_id}'"}
-        return HttpResponse(status=404, content=json.dumps(error_detail, indent=4))
+        error_detail = {"error": "Resource not found", "error_description": f"No company found for ID '{company_id}' (received status code '{r.status_code}' from remote server)"}
+        raise Http404(json.dumps(error_detail, indent=4))
 
     # Transform
     data = transform(r.text)
