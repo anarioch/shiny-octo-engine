@@ -2,7 +2,7 @@
 
 My MWNZ evaluation in python, as both a CLI app and an API in django.
 
-The history of this repo shows the basic steps that have been taken to arrive here, and follows [Conventional Commits][https://www.conventionalcommits.org/] for readability.
+The history of this repo shows the basic steps that have been taken to arrive here, and follows [Conventional Commits](https://www.conventionalcommits.org/) for readability.
 
 ## Implementation
 
